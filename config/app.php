@@ -139,6 +139,8 @@ return [
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
+        CodeProject\Providers\CodeProjectRepositoryProvider::class,
+
         /*
          * Application Service Providers...
          */
