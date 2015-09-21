@@ -2,7 +2,6 @@
 
 namespace CodeProject\Http\Controllers;
 
-use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Services\ProjectService;
 use Illuminate\Http\Request;
 
@@ -11,21 +10,15 @@ use CodeProject\Http\Requests;
 class ProjectController extends Controller
 {
     /**
-     * @var ProjectRepository
-     */
-    private $repository;
-    /**
      * @var ProjectService
      */
     private $service;
 
     /**
-     * @param ProjectRepository $repository
      * @param ProjectService $service
      */
-    public function __construct(ProjectRepository $repository, ProjectService $service)
+    public function __construct(ProjectService $service)
     {
-        $this->repository = $repository;
         $this->service = $service;
     }
 
@@ -42,7 +35,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -53,7 +46,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -64,8 +57,8 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -76,11 +69,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
     {
-        $this->repository->find($id)->delete();
+        return $this->service->delete($id);
     }
 }

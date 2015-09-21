@@ -38,6 +38,11 @@ class ProjectService
                 'error' => true,
                 'message' => $e->getMessageBag()
             ];
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
         }
     }
 
@@ -51,6 +56,11 @@ class ProjectService
                 'error' => true,
                 'message' => $e->getMessageBag()
             ];
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
         }
     }
 
@@ -61,6 +71,25 @@ class ProjectService
 
     public function find($id)
     {
-        return $this->repository->with(['owner', 'client'])->find($id);
+        try {
+            return $this->repository->with(['owner', 'client'])->find($id);
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $this->repository->find($id)->delete();
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
+        }
     }
 }

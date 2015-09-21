@@ -38,6 +38,11 @@ class ClientService
                 'error' => true,
                 'message' => $e->getMessageBag()
             ];
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
         }
     }
 
@@ -50,6 +55,40 @@ class ClientService
             return [
                 'error' => true,
                 'message' => $e->getMessageBag()
+            ];
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+
+    public function all()
+    {
+        return $this->repository->all();
+    }
+
+    public function find($id)
+    {
+        try {
+            return $this->repository->find($id);
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $this->repository->find($id)->delete();
+        } catch (\Exception $e) {
+            return [
+                'error' => true,
+                'message' => $e->getMessage()
             ];
         }
     }
