@@ -60,3 +60,10 @@ $factory->define(CodeProject\Entities\ProjectTask::class, function (Faker\Genera
         'status' => rand(1, 3)
     ];
 });
+
+$factory->define(CodeProject\Entities\ProjectMember::class, function (Faker\Generator $faker) {
+    return [
+        'project_id' => rand(1, 10),
+        'member_id' => rand(1, 10)
+    ];
+});
