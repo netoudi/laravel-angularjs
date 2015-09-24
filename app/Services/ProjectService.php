@@ -6,6 +6,7 @@ namespace CodeProject\Services;
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class ProjectService
 {
@@ -66,7 +67,7 @@ class ProjectService
 
     public function all()
     {
-        return $this->repository->with(['owner', 'client'])->all();
+        return $this->repository->with(['owner', 'client'])->findWhere(['owner_id' => Authorizer::getResourceOwnerId()]);
     }
 
     public function find($id)
@@ -97,6 +98,19 @@ class ProjectService
     {
         if (count($this->repository->findWhere(['id' => $projectId, 'owner_id' => $userId]))) {
             return true;
+        }
+
+        return false;
+    }
+
+    public function hasMember($projectId, $memberId)
+    {
+        $project = $this->repository->find($projectId);
+
+        foreach ($project->members as $member) {
+            if ($member->id == $memberId) {
+                return true;
+            }
         }
 
         return false;

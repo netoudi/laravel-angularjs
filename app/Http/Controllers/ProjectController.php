@@ -6,6 +6,7 @@ use CodeProject\Services\ProjectService;
 use Illuminate\Http\Request;
 
 use CodeProject\Http\Requests;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class ProjectController extends Controller
 {
@@ -51,6 +52,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
+        if ($this->checkProjectPermissions($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
         return $this->service->find($id);
     }
 
@@ -63,6 +68,10 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($this->checkProjectOwner($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
         return $this->service->update($request->all(), $id);
     }
 
@@ -74,6 +83,30 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+        if ($this->checkProjectOwner($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
         return $this->service->delete($id);
     }
+
+    private function checkProjectOwner($projectId)
+    {
+        return $this->service->isOwner($projectId, Authorizer::getResourceOwnerId());
+    }
+
+    private function checkProjectMember($projectId)
+    {
+        return $this->service->hasMember($projectId, Authorizer::getResourceOwnerId());
+    }
+
+    private function checkProjectPermissions($projectId)
+    {
+        if ($this->checkProjectOwner($projectId) or $this->checkProjectMember($projectId)) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
