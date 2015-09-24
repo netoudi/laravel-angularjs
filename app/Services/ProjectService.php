@@ -92,4 +92,13 @@ class ProjectService
             ];
         }
     }
+
+    public function isOwner($projectId, $userId)
+    {
+        if (count($this->repository->findWhere(['id' => $projectId, 'owner_id' => $userId]))) {
+            return true;
+        }
+
+        return false;
+    }
 }
