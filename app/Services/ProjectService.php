@@ -2,7 +2,6 @@
 
 namespace CodeProject\Services;
 
-
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -33,6 +32,7 @@ class ProjectService
     {
         try {
             $this->validator->with($data)->passesOrFail();
+            $this->setPresenter();
             return $this->repository->create($data);
         } catch (ValidatorException $e) {
             return [
@@ -51,6 +51,7 @@ class ProjectService
     {
         try {
             $this->validator->with($data)->passesOrFail();
+            $this->setPresenter();
             return $this->repository->update($data, $id);
         } catch (ValidatorException $e) {
             return [
@@ -67,12 +68,14 @@ class ProjectService
 
     public function all()
     {
+        $this->setPresenter();
         return $this->repository->with(['owner', 'client'])->findWhere(['owner_id' => Authorizer::getResourceOwnerId()]);
     }
 
     public function find($id)
     {
         try {
+            $this->setPresenter();
             return $this->repository->with(['owner', 'client'])->find($id);
         } catch (\Exception $e) {
             return [
@@ -114,5 +117,10 @@ class ProjectService
         }
 
         return false;
+    }
+
+    private function setPresenter()
+    {
+        $this->repository->setPresenter('CodeProject\\Presenters\\ProjectPresenter');
     }
 }

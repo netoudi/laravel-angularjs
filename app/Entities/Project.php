@@ -20,6 +20,12 @@ class Project extends Model implements Transformable
         'due_date'
     ];
 
+    public function getDueDate()
+    {
+        $date = new \DateTime($this->due_date);
+        return $date->format('c');
+    }
+
     public function owner()
     {
         return $this->belongsTo(User::class);

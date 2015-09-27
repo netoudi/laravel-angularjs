@@ -32,6 +32,7 @@ class ClientService
     {
         try {
             $this->validator->with($data)->passesOrFail();
+            $this->setPresenter();
             return $this->repository->create($data);
         } catch (ValidatorException $e) {
             return [
@@ -50,6 +51,7 @@ class ClientService
     {
         try {
             $this->validator->with($data)->passesOrFail();
+            $this->setPresenter();
             return $this->repository->update($data, $id);
         } catch (ValidatorException $e) {
             return [
@@ -66,12 +68,14 @@ class ClientService
 
     public function all()
     {
+        $this->setPresenter();
         return $this->repository->all();
     }
 
     public function find($id)
     {
         try {
+            $this->setPresenter();
             return $this->repository->find($id);
         } catch (\Exception $e) {
             return [
@@ -91,5 +95,10 @@ class ClientService
                 'message' => $e->getMessage()
             ];
         }
+    }
+
+    private function setPresenter()
+    {
+        $this->repository->setPresenter('CodeProject\\Presenters\\ClientPresenter');
     }
 }

@@ -32,6 +32,7 @@ class ProjectMemberService
     {
         try {
             $this->validator->with($data)->passesOrFail();
+            $this->setPresenter();
             return $this->repository->create($data);
         } catch (ValidatorException $e) {
             return [
@@ -48,12 +49,14 @@ class ProjectMemberService
 
     public function all($id)
     {
+        $this->setPresenter();
         return $this->repository->findWhere(['project_id' => $id]);
     }
 
     public function find($id, $memberId)
     {
         try {
+            $this->setPresenter();
             return $this->repository->findWhere(['project_id' => $id, 'member_id' => $memberId]);
         } catch (\Exception $e) {
             return [
@@ -73,5 +76,10 @@ class ProjectMemberService
                 'message' => $e->getMessage()
             ];
         }
+    }
+
+    private function setPresenter()
+    {
+        $this->repository->setPresenter('CodeProject\\Presenters\\ProjectMemberPresenter');
     }
 }

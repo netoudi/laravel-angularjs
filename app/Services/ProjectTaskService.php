@@ -32,6 +32,7 @@ class ProjectTaskService
     {
         try {
             $this->validator->with($data)->passesOrFail();
+            $this->setPresenter();
             return $this->repository->create($data);
         } catch (ValidatorException $e) {
             return [
@@ -50,6 +51,7 @@ class ProjectTaskService
     {
         try {
             $this->validator->with($data)->passesOrFail();
+            $this->setPresenter();
             return $this->repository->update($data, $noteId);
         } catch (ValidatorException $e) {
             return [
@@ -66,12 +68,14 @@ class ProjectTaskService
 
     public function all($id)
     {
+        $this->setPresenter();
         return $this->repository->findWhere(['project_id' => $id]);
     }
 
     public function find($id, $noteId)
     {
         try {
+            $this->setPresenter();
             return $this->repository->findWhere(['project_id' => $id, 'id' => $noteId]);
         } catch (\Exception $e) {
             return [
@@ -91,5 +95,10 @@ class ProjectTaskService
                 'message' => $e->getMessage()
             ];
         }
+    }
+
+    private function setPresenter()
+    {
+        $this->repository->setPresenter('CodeProject\\Presenters\\ProjectTaskPresenter');
     }
 }
