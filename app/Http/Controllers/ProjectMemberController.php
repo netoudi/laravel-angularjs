@@ -3,9 +3,11 @@
 namespace CodeProject\Http\Controllers;
 
 use CodeProject\Services\ProjectMemberService;
+use CodeProject\Services\ProjectService;
 use Illuminate\Http\Request;
 
 use CodeProject\Http\Requests;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class ProjectMemberController extends Controller
 {
@@ -13,13 +15,19 @@ class ProjectMemberController extends Controller
      * @var ProjectMemberService
      */
     private $service;
+    /**
+     * @var ProjectService
+     */
+    private $projectService;
 
     /**
      * @param ProjectMemberService $service
+     * @param ProjectService $projectService
      */
-    public function __construct(ProjectMemberService $service)
+    public function __construct(ProjectMemberService $service, ProjectService $projectService)
     {
         $this->service = $service;
+        $this->projectService = $projectService;
     }
 
     /**
@@ -30,6 +38,10 @@ class ProjectMemberController extends Controller
      */
     public function index($id)
     {
+        if ($this->checkProjectPermissions($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
         return $this->service->all($id);
     }
 
@@ -37,11 +49,19 @@ class ProjectMemberController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  Request $request
+     * @param  int $projectId
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $projectId)
     {
-        return $this->service->create($request->all());
+        if ($this->checkProjectOwner($projectId) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
+        $data = $request->all();
+        $data['project_id'] = $projectId;
+
+        return $this->service->create($data);
     }
 
     /**
@@ -53,6 +73,10 @@ class ProjectMemberController extends Controller
      */
     public function show($id, $memberId)
     {
+        if ($this->checkProjectPermissions($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
         return $this->service->find($id, $memberId);
     }
 
@@ -65,6 +89,29 @@ class ProjectMemberController extends Controller
      */
     public function destroy($id, $memberId)
     {
+        if ($this->checkProjectOwner($id) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
         return $this->service->delete($id, $memberId);
+    }
+
+    private function checkProjectOwner($projectId)
+    {
+        return $this->projectService->isOwner($projectId, Authorizer::getResourceOwnerId());
+    }
+
+    private function checkProjectMember($projectId)
+    {
+        return $this->projectService->hasMember($projectId, Authorizer::getResourceOwnerId());
+    }
+
+    private function checkProjectPermissions($projectId)
+    {
+        if ($this->checkProjectOwner($projectId) or $this->checkProjectMember($projectId)) {
+            return true;
+        }
+
+        return false;
     }
 }
