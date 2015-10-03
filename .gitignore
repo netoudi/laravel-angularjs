@@ -3,3 +3,7 @@
 Homestead.yaml
 Homestead.json
 .env
+resources/bower_components
+public/build
+public/css
+public/js
