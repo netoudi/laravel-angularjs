@@ -57,6 +57,10 @@ app.config([
         .when('/project/:id/notes/:idNote/edit', {
             templateUrl: 'build/views/project/note/edit.html',
             controller: 'ProjectNoteEditController'
+        })
+        .when('/project/:id/notes/:idNote/remove', {
+            templateUrl: 'build/views/project/note/remove.html',
+            controller: 'ProjectNoteRemoveController'
         });
 
     OAuthProvider.configure({

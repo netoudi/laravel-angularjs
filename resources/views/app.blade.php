@@ -92,6 +92,7 @@
     <script src="{{ asset('build/js/controllers/project/note/noteList.js') }}"></script>
     <script src="{{ asset('build/js/controllers/project/note/noteNew.js') }}"></script>
     <script src="{{ asset('build/js/controllers/project/note/noteEdit.js') }}"></script>
+    <script src="{{ asset('build/js/controllers/project/note/noteRemove.js') }}"></script>
 
     <!-- SERVICES -->
     <script src="{{ asset('build/js/services/client.js') }}"></script>
