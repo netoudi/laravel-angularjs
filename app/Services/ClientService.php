@@ -99,6 +99,6 @@ class ClientService
 
     private function setPresenter()
     {
-        $this->repository->setPresenter('CodeProject\\Presenters\\ClientPresenter');
+//        $this->repository->setPresenter('CodeProject\\Presenters\\ClientPresenter');
     }
 }
