@@ -99,6 +99,6 @@ class ProjectNoteService
 
     private function setPresenter()
     {
-        $this->repository->setPresenter('CodeProject\\Presenters\\ProjectNotePresenter');
+//        $this->repository->setPresenter('CodeProject\\Presenters\\ProjectNotePresenter');
     }
 }
