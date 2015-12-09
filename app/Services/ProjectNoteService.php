@@ -76,7 +76,7 @@ class ProjectNoteService
     {
         try {
             $this->setPresenter();
-            return $this->repository->findWhere(['project_id' => $id, 'id' => $noteId]);
+            return $this->repository->findWhere(['project_id' => $id, 'id' => $noteId])[0];
         } catch (\Exception $e) {
             return [
                 'error' => true,
