@@ -89,8 +89,11 @@
     <script src="{{ asset('build/js/controllers/client/clientEdit.js') }}"></script>
     <script src="{{ asset('build/js/controllers/client/clientRemove.js') }}"></script>
 
+    <script src="{{ asset('build/js/controllers/project/note/noteList.js') }}"></script>
+
     <!-- SERVICES -->
     <script src="{{ asset('build/js/services/client.js') }}"></script>
+    <script src="{{ asset('build/js/services/projectNote.js') }}"></script>
 @else
     <script src="{{ elixir('js/all.js') }}"></script>
 @endif
