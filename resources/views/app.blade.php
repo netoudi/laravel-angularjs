@@ -7,8 +7,10 @@
     <title>Code Project</title>
 
     @if(Config::get('app.debug'))
-        <link rel="stylesheet" href="{{ asset('build/css/vendor/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('build/css/vendor/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/components.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/flaticon.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/font-awesome.css') }}">
     @else
         <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
         @endif
