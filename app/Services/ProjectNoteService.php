@@ -76,7 +76,13 @@ class ProjectNoteService
     {
         try {
             $this->setPresenter();
-            return $this->repository->findWhere(['project_id' => $id, 'id' => $noteId])[0];
+            $result = $this->repository->findWhere(['project_id' => $id, 'id' => $noteId]);
+            if (isset($result['data']) && count($result['data'] == 1)) {
+                $result = [
+                    'data' => $result['data'][0]
+                ];
+            }
+            return $result;
         } catch (\Exception $e) {
             return [
                 'error' => true,
@@ -99,6 +105,6 @@ class ProjectNoteService
 
     private function setPresenter()
     {
-//        $this->repository->setPresenter('CodeProject\\Presenters\\ProjectNotePresenter');
+        $this->repository->setPresenter('CodeProject\\Presenters\\ProjectNotePresenter');
     }
 }
