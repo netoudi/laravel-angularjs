@@ -12,7 +12,7 @@
                             <th>Progresso</th>
                             <th>Status</th>
                             <th>Conclusão</th>
-                            <th>Ações</th>
+                            <th width="160">Ações</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -23,6 +23,7 @@
                             <td>{{ o.status }}</td>
                             <td>{{ o.due_date | dateBr }}</td>
                             <td>
+                                <a ng-href="#/project/{{ o.id }}/notes">Notas</a> |
                                 <a ng-href="#/project/{{ o.id }}/edit">Editar</a> |
                                 <a ng-href="#/project/{{ o.id }}/remove">Excluir</a>
                             </td>

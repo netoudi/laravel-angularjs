@@ -1,6 +1,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <h3>Projeto <strong>{{ project.name | uppercase }}</strong></h3>
+            <br>
             <div class="panel panel-default">
                 <div class="panel-heading">Edição de Nota</div>
                 <div class="panel-body">
@@ -27,9 +29,12 @@
                             </div>
                         </div>
 
+                        <hr>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">Salvar</button>
+                                <a ng-href="#/project/{{ project.id }}/notes" class="btn btn-default">Cancelar</a>
                             </div>
                         </div>
                     </form>

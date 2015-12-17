@@ -2,8 +2,8 @@ angular.module('app.controllers')
     .controller('LoginController', ['$scope', '$location', '$cookies', 'User', 'OAuth',
         function ($scope, $location, $cookies, User, OAuth) {
             $scope.user = {
-                username: '',
-                password: ''
+                username: 'admin@gmail.com',
+                password: '123456'
             };
 
             $scope.error = {

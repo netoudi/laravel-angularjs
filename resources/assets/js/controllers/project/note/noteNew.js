@@ -1,7 +1,8 @@
 angular.module('app.controllers')
     .controller('ProjectNoteNewController',
-        ['$scope', '$location', '$routeParams', 'ProjectNote',
-            function ($scope, $location, $routeParams, ProjectNote) {
+        ['$scope', '$location', '$routeParams', 'Project', 'ProjectNote',
+            function ($scope, $location, $routeParams, Project, ProjectNote) {
+                $scope.project = Project.get({id: $routeParams.id});
                 $scope.note = new ProjectNote({id: $routeParams.id});
 
                 $scope.save = function () {

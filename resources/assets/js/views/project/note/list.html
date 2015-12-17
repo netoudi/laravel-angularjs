@@ -1,8 +1,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <h3>Projeto <strong>{{ project.name | uppercase }}</strong><a ng-href="#/project" class="pull-right"><small>&laquo; Voltar</small></a></h3>
+            <br>
             <div class="panel panel-default">
-                <div class="panel-heading">Listagem de Notas</div>
+                <div class="panel-heading">Listagem de Notas <a ng-href="#/project/{{ project.id }}/notes/new" class="pull-right">Nova Nota</a></div>
                 <div class="panel-body">
                     <table class="table">
                         <thead>
