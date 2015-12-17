@@ -86,18 +86,28 @@
     <!-- CONTROLLERS -->
     <script src="{{ asset('build/js/controllers/login.js') }}"></script>
     <script src="{{ asset('build/js/controllers/home.js') }}"></script>
+
     <script src="{{ asset('build/js/controllers/client/clientList.js') }}"></script>
     <script src="{{ asset('build/js/controllers/client/clientNew.js') }}"></script>
     <script src="{{ asset('build/js/controllers/client/clientEdit.js') }}"></script>
     <script src="{{ asset('build/js/controllers/client/clientRemove.js') }}"></script>
+
+    <script src="{{ asset('build/js/controllers/project/projectList.js') }}"></script>
+    <script src="{{ asset('build/js/controllers/project/projectNew.js') }}"></script>
+    <script src="{{ asset('build/js/controllers/project/projectEdit.js') }}"></script>
+    <script src="{{ asset('build/js/controllers/project/projectRemove.js') }}"></script>
 
     <script src="{{ asset('build/js/controllers/project/note/noteList.js') }}"></script>
     <script src="{{ asset('build/js/controllers/project/note/noteNew.js') }}"></script>
     <script src="{{ asset('build/js/controllers/project/note/noteEdit.js') }}"></script>
     <script src="{{ asset('build/js/controllers/project/note/noteRemove.js') }}"></script>
 
+    <!-- FILTERS -->
+    <script src="{{ asset('build/js/filters/date-br.js') }}"></script>
+
     <!-- SERVICES -->
     <script src="{{ asset('build/js/services/client.js') }}"></script>
+    <script src="{{ asset('build/js/services/project.js') }}"></script>
     <script src="{{ asset('build/js/services/projectNote.js') }}"></script>
     <script src="{{ asset('build/js/services/user.js') }}"></script>
 @else
