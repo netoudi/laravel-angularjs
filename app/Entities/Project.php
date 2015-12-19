@@ -23,7 +23,7 @@ class Project extends Model implements Transformable
     public function getDueDate()
     {
         $date = new \DateTime($this->due_date);
-        return $date->format('c');
+        return $date->format('Y-m-d');
     }
 
     public function owner()
