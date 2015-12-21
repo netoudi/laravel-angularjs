@@ -34,7 +34,7 @@
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" ng-model="project.client_id"
-                                       typeahead="o.id as o.name for o in clients | filter: $viewValue | limitTo: 10"
+                                       typeahead="o.id as o.name for o in getClients($viewValue) | limitTo: 10"
                                        typeahead-input-formatter="formatName($model)">
 
                                 <div ng-messages="form.project_id.$error" class="help-block" ng-show="form.project_id.$touched">
