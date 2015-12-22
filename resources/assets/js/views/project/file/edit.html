@@ -29,6 +29,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group" ng-class="{'has-error': !form.description.$valid && form.description.$touched}">
+                            <label class="col-md-4 control-label">Arquivo</label>
+
+                            <div class="col-md-6">
+                                <project-file-download id-project="{{ project.id }}" id-file="{{ file.id }}"></project-file-download>
+                            </div>
+                        </div>
+
                         <hr>
 
                         <div class="form-group">

@@ -37,6 +37,7 @@
 
                             <div class="col-md-6">
                                 <div class="btn btn-info" ngf-select ng-model="file.file" name="file">Select</div>
+                                {{ file.file.name }}
                                 <div ng-messages="form.file.$error" class="help-block" ng-show="form.file.$touched">
                                     <div ng-message="required">Campo obrigatório.</div>
                                 </div>
