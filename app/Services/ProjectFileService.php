@@ -5,9 +5,9 @@ namespace CodeProject\Services;
 use CodeProject\Repositories\ProjectFileRepository;
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectFileValidator;
-use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class ProjectFileService
 {
@@ -159,6 +159,21 @@ class ProjectFileService
                 'error' => true,
                 'message' => $e->getMessage()
             ];
+        }
+    }
+
+    public function getFilePath($projectId, $fileId)
+    {
+        $file = $this->repository->findWhere(['project_id' => $projectId, 'id' => $fileId])->first();
+
+        return $this->getBaseUrl($file);
+    }
+
+    private function getBaseUrl($file)
+    {
+        switch ($this->storage->getDefaultDriver()) {
+            case 'local':
+                return $this->storage->getDriver()->getAdapter()->getPathPrefix() . '/' . $file->file;
         }
     }
 

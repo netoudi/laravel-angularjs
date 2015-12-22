@@ -112,6 +112,20 @@ class ProjectFileController extends Controller
         return $this->service->delete($projectId, $fileId);
     }
 
+    /**
+     * @param $projectId
+     * @param $fileId
+     * @return array|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function showFile($projectId, $fileId)
+    {
+        if ($this->checkProjectPermissions($projectId) == false) {
+            return ['error' => 'Access Forbidden'];
+        }
+
+        return response()->download($this->service->getFilePath($projectId, $fileId));
+    }
+
     private function checkProjectOwner($projectId)
     {
         return $this->projectService->isOwner($projectId, Authorizer::getResourceOwnerId());
