@@ -5,6 +5,16 @@ angular.module('app.controllers')
                 $scope.project = new Project();
                 $scope.status = appConfig.project.status;
 
+                $scope.due_date = {
+                    status: {
+                        opened: false
+                    }
+                };
+
+                $scope.open = function () {
+                    $scope.due_date.status.opened = true;
+                };
+
                 $scope.save = function () {
                     if ($scope.form.$valid) {
                         $scope.project.owner_id = $cookies.getObject('user').id;
