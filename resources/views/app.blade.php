@@ -104,6 +104,11 @@
     <script src="{{ asset('build/js/controllers/project/note/noteEdit.js') }}"></script>
     <script src="{{ asset('build/js/controllers/project/note/noteRemove.js') }}"></script>
 
+    <script src="{{ asset('build/js/controllers/project/file/fileList.js') }}"></script>
+    <script src="{{ asset('build/js/controllers/project/file/fileNew.js') }}"></script>
+    <script src="{{ asset('build/js/controllers/project/file/fileEdit.js') }}"></script>
+    <script src="{{ asset('build/js/controllers/project/file/fileRemove.js') }}"></script>
+
     <!-- FILTERS -->
     <script src="{{ asset('build/js/filters/date-br.js') }}"></script>
 
@@ -111,6 +116,7 @@
     <script src="{{ asset('build/js/services/client.js') }}"></script>
     <script src="{{ asset('build/js/services/project.js') }}"></script>
     <script src="{{ asset('build/js/services/projectNote.js') }}"></script>
+    <script src="{{ asset('build/js/services/projectFile.js') }}"></script>
     <script src="{{ asset('build/js/services/user.js') }}"></script>
 @else
     <script src="{{ elixir('js/all.js') }}"></script>

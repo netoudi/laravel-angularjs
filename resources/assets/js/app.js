@@ -120,6 +120,24 @@ app.config([
             .when('/project/:id/notes/:idNote/remove', {
                 templateUrl: 'build/views/project/note/remove.html',
                 controller: 'ProjectNoteRemoveController'
+            })
+
+            // Project File
+            .when('/project/:id/file', {
+                templateUrl: 'build/views/project/file/list.html',
+                controller: 'ProjectFileListController'
+            })
+            .when('/project/:id/file/new', {
+                templateUrl: 'build/views/project/file/new.html',
+                controller: 'ProjectFileNewController'
+            })
+            .when('/project/:id/file/:idFile/edit', {
+                templateUrl: 'build/views/project/file/edit.html',
+                controller: 'ProjectFileEditController'
+            })
+            .when('/project/:id/file/:idFile/remove', {
+                templateUrl: 'build/views/project/file/remove.html',
+                controller: 'ProjectFileRemoveController'
             });
 
         OAuthProvider.configure({
