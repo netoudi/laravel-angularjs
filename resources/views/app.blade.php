@@ -109,6 +109,9 @@
     <script src="{{ asset('build/js/controllers/project/file/fileEdit.js') }}"></script>
     <script src="{{ asset('build/js/controllers/project/file/fileRemove.js') }}"></script>
 
+    <!-- DIRECTIVES -->
+    <script src="{{ asset('build/js/directives/projectFileDownload.js') }}"></script>
+
     <!-- FILTERS -->
     <script src="{{ asset('build/js/filters/date-br.js') }}"></script>
 

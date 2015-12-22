@@ -123,7 +123,17 @@ class ProjectFileController extends Controller
             return ['error' => 'Access Forbidden'];
         }
 
-        return response()->download($this->service->getFilePath($projectId, $fileId));
+        $file = $this->service->getFile($projectId, $fileId);
+
+        $filePath = $this->service->getFilePath($projectId, $fileId);
+        $fileContent = file_get_contents($filePath);
+        $fileContent64 = base64_encode($fileContent);
+
+        return [
+            'name' => $file->file,
+            'file' => $fileContent64,
+            'size' => filesize($filePath)
+        ];
     }
 
     private function checkProjectOwner($projectId)

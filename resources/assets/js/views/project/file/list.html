@@ -10,7 +10,7 @@
                         <thead>
                         <tr>
                             <th></th>
-                            <th width="120">Ações</th>
+                            <th width="200">Ações</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -20,6 +20,7 @@
                                 {{ o.description }}
                             </td>
                             <td>
+                                <project-file-download id-project="{{ o.project_id }}" id-file="{{ o.id }}"></project-file-download>
                                 <a ng-href="#/project/{{ o.project_id }}/file/{{ o.id }}/edit">Editar</a> |
                                 <a ng-href="#/project/{{ o.project_id }}/file/{{ o.id }}/remove">Excluir</a>
                             </td>

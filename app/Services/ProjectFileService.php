@@ -162,6 +162,11 @@ class ProjectFileService
         }
     }
 
+    public function getFile($projectId, $fileId)
+    {
+        return $this->repository->findWhere(['project_id' => $projectId, 'id' => $fileId])->first();
+    }
+
     public function getFilePath($projectId, $fileId)
     {
         $file = $this->repository->findWhere(['project_id' => $projectId, 'id' => $fileId])->first();
