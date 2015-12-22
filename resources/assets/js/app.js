@@ -6,7 +6,8 @@ var app = angular.module('app', [
     'app.services',
     'ui.bootstrap.typeahead',
     'ui.bootstrap.datepicker',
-    'ui.bootstrap.tpls'
+    'ui.bootstrap.tpls',
+    'ngFileUpload'
 ]);
 
 angular.module('app.controllers', ['ngMessages', 'angular-oauth2']);
