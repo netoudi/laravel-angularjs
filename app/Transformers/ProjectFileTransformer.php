@@ -11,6 +11,7 @@ class ProjectFileTransformer extends TransformerAbstract
     {
         return [
             'id' => $model->id,
+            'project_id' => $model->project->id,
             'name' => $model->name,
             'description' => $model->description,
             'file' => $model->file,
