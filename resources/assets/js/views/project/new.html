@@ -29,16 +29,21 @@
                             </div>
                         </div>
 
-                        <div class="form-group" ng-class="{'has-error': !form.project_id.$valid && form.project_id.$touched}">
+                        <div class="form-group" ng-class="{'has-error': !form.client_id.$valid && form.client_id.$touched}">
                             <label class="col-md-4 control-label">Cliente</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" ng-model="project.client_id"
-                                       typeahead="o.id as o.name for o in getClients($viewValue) | limitTo: 10"
-                                       typeahead-input-formatter="formatName($model)">
+                                <input type="text" class="form-control" name="client_id"
+                                       ng-model="clientSelected"
+                                       typeahead="o as o.name for o in getClients($viewValue) | limitTo: 10"
+                                       typeahead-input-formatter="formatName($model)"
+                                       typeahead-on-select="selectClient($item)"
+                                       typeahead-editable="false"
+                                       required>
 
-                                <div ng-messages="form.project_id.$error" class="help-block" ng-show="form.project_id.$touched">
+                                <div ng-messages="form.client_id.$error" class="help-block" ng-show="form.client_id.$touched">
                                     <div ng-message="required">Campo obrigatório.</div>
+                                    <div ng-message="editable">Selecione um cliente válido.</div>
                                 </div>
                             </div>
                         </div>
