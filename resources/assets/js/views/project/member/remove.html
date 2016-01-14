@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Projeto <strong>{{ project.name | uppercase }}</strong></h3>
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">Exclusão de Membro</div>
+                <div class="panel-body">
+                    <p>Deseja excluir realmente este membro?</p>
+                    <ul>
+                        <li><strong>Nome:</strong> {{ member.name }}</li>
+                        <li><strong>E-mail:</strong> {{ member.email }}</li>
+                    </ul>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-md-12 text-right">
+                            <button type="button" class="btn btn-danger" ng-click="remove()">Excluir</button>
+                            <a ng-href="#/project/{{ project.id }}/member" class="btn btn-default">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

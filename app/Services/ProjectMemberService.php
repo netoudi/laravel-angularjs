@@ -57,7 +57,13 @@ class ProjectMemberService
     {
         try {
             $this->setPresenter();
-            return $this->repository->findWhere(['project_id' => $id, 'member_id' => $memberId]);
+            $result = $this->repository->findWhere(['project_id' => $id, 'member_id' => $memberId]);
+            if (isset($result['data']) && count($result['data'] == 1)) {
+                $result = [
+                    'data' => $result['data'][0]
+                ];
+            }
+            return $result;
         } catch (\Exception $e) {
             return [
                 'error' => true,

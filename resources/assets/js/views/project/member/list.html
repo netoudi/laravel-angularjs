@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Projeto <strong>{{ project.name | uppercase }}</strong><a ng-href="#/project" class="pull-right"><small>&laquo; Voltar</small></a></h3>
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">Listagem de Membros <a ng-href="#/project/{{ project.id }}/member/new" class="pull-right">Novo Membro</a></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th width="70">Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="o in members">
+                            <td>{{ o.name }}</td>
+                            <td>{{ o.email }}</td>
+                            <td>
+                                <a ng-href="#/project/{{ project.id }}/member/{{ o.id }}/remove">Excluir</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

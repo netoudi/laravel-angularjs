@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>Projeto <strong>{{ project.name | uppercase }}</strong></h3>
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">Cadastro de Membro</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" name="form" role="form" method="POST" ng-submit="save()">
+                        <div class="form-group" ng-class="{'has-error': !form.member_id.$valid && form.member_id.$touched}">
+                            <label class="col-md-4 control-label">Membro</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="member_id" autocomplete="off"
+                                       ng-model="userSelected"
+                                       typeahead="o as o.name for o in getUsers($viewValue) | limitTo: 10"
+                                       typeahead-input-formatter="formatName($model)"
+                                       typeahead-on-select="selectUser($item)"
+                                       typeahead-editable="false"
+                                       required>
+
+                                <div ng-messages="form.member_id.$error" class="help-block" ng-show="form.member_id.$touched">
+                                    <div ng-message="required">Campo obrigatório.</div>
+                                    <div ng-message="editable">Selecione um membro válido.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                <a ng-href="#/project/{{ project.id }}/member" class="btn btn-default">Cancelar</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

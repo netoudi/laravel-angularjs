@@ -114,6 +114,10 @@
     <script src="{{ asset('build/js/controllers/project/task/taskEdit.js') }}"></script>
     <script src="{{ asset('build/js/controllers/project/task/taskRemove.js') }}"></script>
 
+    <script src="{{ asset('build/js/controllers/project/member/memberList.js') }}"></script>
+    <script src="{{ asset('build/js/controllers/project/member/memberNew.js') }}"></script>
+    <script src="{{ asset('build/js/controllers/project/member/memberRemove.js') }}"></script>
+
     <!-- DIRECTIVES -->
     <script src="{{ asset('build/js/directives/projectFileDownload.js') }}"></script>
 
@@ -127,6 +131,7 @@
     <script src="{{ asset('build/js/services/projectNote.js') }}"></script>
     <script src="{{ asset('build/js/services/projectFile.js') }}"></script>
     <script src="{{ asset('build/js/services/projectTask.js') }}"></script>
+    <script src="{{ asset('build/js/services/projectMember.js') }}"></script>
     <script src="{{ asset('build/js/services/user.js') }}"></script>
 @else
     <script src="{{ elixir('js/all.js') }}"></script>

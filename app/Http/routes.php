@@ -21,6 +21,7 @@ Route::post('oauth/access_token', function () {
 
 Route::group(['middleware' => 'oauth'], function () {
 
+    Route::get('user', 'UserController@index');
     Route::get('user/authenticated', 'UserController@authenticated');
 
     Route::resource('client', 'ClientController', ['except' => ['create', 'edit']]);
