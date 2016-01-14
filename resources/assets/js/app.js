@@ -143,6 +143,24 @@ app.config([
             .when('/project/:id/file/:idFile/remove', {
                 templateUrl: 'build/views/project/file/remove.html',
                 controller: 'ProjectFileRemoveController'
+            })
+
+            // Project Task
+            .when('/project/:id/task', {
+                templateUrl: 'build/views/project/task/list.html',
+                controller: 'ProjectTaskListController'
+            })
+            .when('/project/:id/task/new', {
+                templateUrl: 'build/views/project/task/new.html',
+                controller: 'ProjectTaskNewController'
+            })
+            .when('/project/:id/task/:idTask/edit', {
+                templateUrl: 'build/views/project/task/edit.html',
+                controller: 'ProjectTaskEditController'
+            })
+            .when('/project/:id/task/:idTask/remove', {
+                templateUrl: 'build/views/project/task/remove.html',
+                controller: 'ProjectTaskRemoveController'
             });
 
         OAuthProvider.configure({

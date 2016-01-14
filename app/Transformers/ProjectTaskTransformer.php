@@ -11,6 +11,7 @@ class ProjectTaskTransformer extends TransformerAbstract
     {
         return [
             'id' => $model->id,
+            'project_id' => $model->project_id,
             'name' => $model->name,
             'start_date' => $model->getStartDate(),
             'due_date' => $model->getDueDate(),

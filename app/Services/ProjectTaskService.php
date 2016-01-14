@@ -76,7 +76,13 @@ class ProjectTaskService
     {
         try {
             $this->setPresenter();
-            return $this->repository->findWhere(['project_id' => $id, 'id' => $noteId]);
+            $result = $this->repository->findWhere(['project_id' => $id, 'id' => $noteId]);
+            if (isset($result['data']) && count($result['data'] == 1)) {
+                $result = [
+                    'data' => $result['data'][0]
+                ];
+            }
+            return $result;
         } catch (\Exception $e) {
             return [
                 'error' => true,

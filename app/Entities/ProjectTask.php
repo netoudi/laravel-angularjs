@@ -33,13 +33,13 @@ class ProjectTask extends Model implements Transformable
     public function getStartDate()
     {
         $date = new \DateTime($this->start_date);
-        return $date->format('c');
+        return $date->format('Y-m-d');
     }
 
     public function getDueDate()
     {
         $date = new \DateTime($this->due_date);
-        return $date->format('c');
+        return $date->format('Y-m-d');
     }
 
     public function project()
