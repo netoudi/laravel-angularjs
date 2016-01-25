@@ -21,6 +21,8 @@ class ProjectController extends Controller
     public function __construct(ProjectService $service)
     {
         $this->service = $service;
+        $this->middleware('check.project.owner', ['except' => ['index', 'store', 'show']]);
+        $this->middleware('check.project.permission', ['except' => ['index', 'store', 'update', 'destroy']]);
     }
 
     /**
@@ -52,10 +54,6 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        if ($this->checkProjectPermissions($id) == false) {
-            return ['error' => 'Access Forbidden'];
-        }
-
         return $this->service->find($id);
     }
 
@@ -68,10 +66,6 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($this->checkProjectOwner($id) == false) {
-            return ['error' => 'Access Forbidden'];
-        }
-
         return $this->service->update($request->all(), $id);
     }
 
@@ -83,30 +77,6 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->checkProjectOwner($id) == false) {
-            return ['error' => 'Access Forbidden'];
-        }
-
         return $this->service->delete($id);
     }
-
-    private function checkProjectOwner($projectId)
-    {
-        return $this->service->isOwner($projectId, Authorizer::getResourceOwnerId());
-    }
-
-    private function checkProjectMember($projectId)
-    {
-        return $this->service->hasMember($projectId, Authorizer::getResourceOwnerId());
-    }
-
-    private function checkProjectPermissions($projectId)
-    {
-        if ($this->checkProjectOwner($projectId) or $this->checkProjectMember($projectId)) {
-            return true;
-        }
-
-        return false;
-    }
-
 }
