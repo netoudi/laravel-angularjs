@@ -205,7 +205,7 @@ app.config([
 
     }]);
 
-app.run(['$rootScope', '$location', '$http', 'OAuth', function ($rootScope, $location, $http, OAuth) {
+app.run(['$rootScope', '$location', '$http', 'httpBuffer', '$modal', 'OAuth', function ($rootScope, $location, $http, httpBuffer, $modal, OAuth) {
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
         if (next.$$route.orignalPath != '/login') {
             if (!OAuth.isAuthenticated()) {
@@ -222,18 +222,13 @@ app.run(['$rootScope', '$location', '$http', 'OAuth', function ($rootScope, $loc
 
         // Refresh token when a `invalid_token` error occurs.
         if ('access_denied' === data.rejection.data.error) {
-            if (!$rootScope.isRefreshingToken) {
-                $rootScope.isRefreshingToken = true;
-                return OAuth.getRefreshToken().then(function (response) {
-                    $rootScope.isRefreshingToken = false;
-                    return $http(data.rejection.config).then(function (response) {
-                        return data.deferred.resolve(response);
-                    });
+            httpBuffer.append(data.rejection.config, data.deferred);
+            if (!$rootScope.loginModalOpened) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'build/views/templates/loginModal.html',
+                    controller: 'LoginModalController'
                 });
-            } else {
-                return $http(data.rejection.config).then(function (response) {
-                    return data.deferred.resolve(response);
-                });
+                $rootScope.loginModalOpened = true;
             }
         }
 
