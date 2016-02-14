@@ -8,7 +8,9 @@ var app = angular.module('app', [
     'ui.bootstrap.typeahead',
     'ui.bootstrap.datepicker',
     'ui.bootstrap.tpls',
-    'ngFileUpload'
+    'ui.bootstrap.modal',
+    'ngFileUpload',
+    'http-auth-interceptor'
 ]);
 
 angular.module('app.controllers', ['ngMessages', 'angular-oauth2']);

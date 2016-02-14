@@ -25,7 +25,8 @@ config.vendor_path_js = [
     config.bower_path + '/angular-cookies/angular-cookies.min.js',
     config.bower_path + '/query-string/query-string.js',
     config.bower_path + '/angular-oauth2/dist/angular-oauth2.min.js',
-    config.bower_path + '/ng-file-upload/ng-file-upload.min.js'
+    config.bower_path + '/ng-file-upload/ng-file-upload.min.js',
+    config.bower_path + '/angular-http-auth/src/http-auth-interceptor.js'
 ];
 
 config.build_path_css = config.build_path + '/css';
@@ -41,32 +42,32 @@ config.build_path_image = config.build_path + '/images';
 
 gulp.task('copy-font', function () {
     gulp.src([
-        config.assets_path + '/fonts/**/*'
-    ])
+            config.assets_path + '/fonts/**/*'
+        ])
         .pipe(gulp.dest(config.build_path_font))
         .pipe(liveRelaod());
 });
 
 gulp.task('copy-image', function () {
     gulp.src([
-        config.assets_path + '/images/**/*'
-    ])
+            config.assets_path + '/images/**/*'
+        ])
         .pipe(gulp.dest(config.build_path_image))
         .pipe(liveRelaod());
 });
 
 gulp.task('copy-html', function () {
     gulp.src([
-        config.assets_path + '/js/views/**/*.html'
-    ])
+            config.assets_path + '/js/views/**/*.html'
+        ])
         .pipe(gulp.dest(config.build_path_html))
         .pipe(liveRelaod());
 });
 
 gulp.task('copy-styles', function () {
     gulp.src([
-        config.assets_path + '/css/**/*.css'
-    ])
+            config.assets_path + '/css/**/*.css'
+        ])
         .pipe(gulp.dest(config.build_path_css))
         .pipe(liveRelaod());
 
@@ -77,8 +78,8 @@ gulp.task('copy-styles', function () {
 
 gulp.task('copy-scripts', function () {
     gulp.src([
-        config.assets_path + '/js/**/*.js'
-    ])
+            config.assets_path + '/js/**/*.js'
+        ])
         .pipe(gulp.dest(config.build_path_js))
         .pipe(liveRelaod());
 
