@@ -16,8 +16,9 @@ angular.module('app.services')
                 }
                 if (401 === rejection.status && rejection.data && "access_denied" === rejection.data.error || rejection.headers("www-authenticate") && 0 === rejection.headers("www-authenticate").indexOf("Bearer")) {
                     $rootScope.$emit("oauth:error", {rejection: rejection, deferred: deferred});
+                    return deferred.promise;
                 }
-                return deferred.promise;
+                return $q.reject(rejection);
             }
         };
     }]);

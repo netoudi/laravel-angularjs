@@ -1,6 +1,9 @@
 angular.module('app.controllers')
-    .controller('LoginModalController', ['$scope', '$location', '$cookies', '$modalInstance', 'authService', 'User', 'OAuth',
-        function ($scope, $location, $cookies, $modalInstance, authService, User, OAuth) {
+    .controller('LoginModalController', [
+
+        '$scope', '$location', '$cookies', '$modalInstance', '$rootScope', 'authService', 'User', 'OAuth', 'OAuthToken',
+
+        function ($scope, $location, $cookies, $modalInstance, $rootScope, authService, User, OAuth, OAuthToken) {
             $scope.user = {
                 username: '',
                 password: ''
@@ -14,6 +17,10 @@ angular.module('app.controllers')
             $scope.$on('event:auth-loginConfirmed', function () {
                 $rootScope.loginModalOpened = false;
                 $modalInstance.close();
+            });
+
+            $scope.$on('event:auth-loginCancelled', function () {
+                OAuthToken.removeToken();
             });
 
             $scope.$on('$routeChangeStart', function () {
