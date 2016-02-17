@@ -33,6 +33,9 @@ angular.module('app.services')
                     }
                     return o;
                 }
+            },
+            query: {
+                isArray: false
             }
         });
     }]);

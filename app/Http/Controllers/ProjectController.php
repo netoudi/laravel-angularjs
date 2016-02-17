@@ -28,11 +28,12 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->service->all();
+        return $this->service->findOwner($request->get('limit'), $request->get('columns'));
     }
 
     /**

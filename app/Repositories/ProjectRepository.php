@@ -14,5 +14,7 @@ interface ProjectRepository extends RepositoryInterface
 
     public function hasMember($projectId, $memberId);
 
+    public function findOwner($userId, $limit = null, $columns = array());
+
     public function findWithOwnerAndMember($userId);
 }

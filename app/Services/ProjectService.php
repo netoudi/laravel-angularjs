@@ -66,10 +66,10 @@ class ProjectService
         }
     }
 
-    public function all()
+    public function findOwner($limit = null, $columns = array())
     {
         $this->setPresenter();
-        return $this->repository->findWithOwnerAndMember(Authorizer::getResourceOwnerId());
+        return $this->repository->findOwner(Authorizer::getResourceOwnerId(), $limit, $columns);
     }
 
     public function find($id)
