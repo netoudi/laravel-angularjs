@@ -92,12 +92,12 @@ app.config([
             })
 
             // CLIENTS
-            .when('/clients/dashboard', {
+            .when('/clients', {
                 templateUrl: 'build/views/client/dashboard.html',
                 controller: 'ClientDashboardController',
                 title: 'Clientes'
             })
-            .when('/clients', {
+            .when('/clients/list', {
                 templateUrl: 'build/views/client/list.html',
                 controller: 'ClientListController',
                 title: 'Clientes'
@@ -120,6 +120,11 @@ app.config([
 
             // Projects
             .when('/project', {
+                templateUrl: 'build/views/project/dashboard.html',
+                controller: 'ProjectDashboardController',
+                title: 'Projetos'
+            })
+            .when('/project/list', {
                 templateUrl: 'build/views/project/list.html',
                 controller: 'ProjectListController',
                 title: 'Projetos'
