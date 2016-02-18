@@ -92,37 +92,45 @@ app.config([
             })
             .when('/clients', {
                 templateUrl: 'build/views/client/list.html',
-                controller: 'ClientListController'
+                controller: 'ClientListController',
+                title: 'Clientes'
             })
             .when('/clients/new', {
                 templateUrl: 'build/views/client/new.html',
-                controller: 'ClientNewController'
+                controller: 'ClientNewController',
+                title: 'Clientes'
             })
             .when('/clients/:id/edit', {
                 templateUrl: 'build/views/client/edit.html',
-                controller: 'ClientEditController'
+                controller: 'ClientEditController',
+                title: 'Clientes'
             })
             .when('/clients/:id/remove', {
                 templateUrl: 'build/views/client/remove.html',
-                controller: 'ClientRemoveController'
+                controller: 'ClientRemoveController',
+                title: 'Clientes'
             })
 
             // Projects
             .when('/project', {
                 templateUrl: 'build/views/project/list.html',
-                controller: 'ProjectListController'
+                controller: 'ProjectListController',
+                title: 'Projetos'
             })
             .when('/project/new', {
                 templateUrl: 'build/views/project/new.html',
-                controller: 'ProjectNewController'
+                controller: 'ProjectNewController',
+                title: 'Projetos'
             })
             .when('/project/:id/edit', {
                 templateUrl: 'build/views/project/edit.html',
-                controller: 'ProjectEditController'
+                controller: 'ProjectEditController',
+                title: 'Projetos'
             })
             .when('/project/:id/remove', {
                 templateUrl: 'build/views/project/remove.html',
-                controller: 'ProjectRemoveController'
+                controller: 'ProjectRemoveController',
+                title: 'Projetos'
             })
 
             // Project Note
@@ -216,6 +224,10 @@ app.run(['$rootScope', '$location', '$http', 'httpBuffer', '$modal', 'OAuth', fu
                 $location.path('login');
             }
         }
+    });
+
+    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+        $rootScope.pageTitle = current.$$route.title;
     });
 
     $rootScope.$on('oauth:error', function (event, data) {
