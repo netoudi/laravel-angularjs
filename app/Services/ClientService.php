@@ -72,6 +72,12 @@ class ClientService
         return $this->repository->all();
     }
 
+    public function paginate($limit = null, $columns = array('*'))
+    {
+        $this->setPresenter();
+        return $this->repository->paginate($limit, $columns);
+    }
+
     public function find($id)
     {
         try {

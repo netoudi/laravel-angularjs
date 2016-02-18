@@ -25,11 +25,12 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->service->all();
+        return $this->service->paginate($request->get('limit'), $request->get('columns'));
     }
 
     /**
