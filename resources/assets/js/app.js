@@ -25,8 +25,9 @@ app.provider('appConfig', ['$httpParamSerializerProvider', function ($httpParamS
         baseUrl: 'http://localhost:8000',
         project: {
             status: [
-                {value: 1, label: 'Não Iniciado'},
-                {value: 2, label: 'Iniciado'},
+                {value: 0, label: 'Não iniciou'},
+                {value: 1, label: 'Iniciado'},
+                {value: 2, label: 'Atrasado'},
                 {value: 3, label: 'Concluído'}
             ]
         },

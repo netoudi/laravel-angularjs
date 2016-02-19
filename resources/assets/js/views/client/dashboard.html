@@ -10,19 +10,23 @@
                                     Clientes
 
                                     <div class="btn-group pull-right">
-                                        <label class="select-styled select-styled-default select-styled-sm">
-                                            <select>
-                                                <option selected="selected">A</option>
-                                                <option>B</option>
-                                                <option>C</option>
-                                                <option>D</option>
-                                                <option>E</option>
-                                                <option>F</option>
-                                            </select>
-                                        </label>
-                                        <a href="#/clients/new" class="btn btn-default btn-sm">
-                                            <i class="fa fa-plus"></i>
-                                        </a>
+                                        <div class="btn-group">
+                                            <label class="select-styled select-styled-default select-styled-sm">
+                                                <select name="mySelect" id="mySelect"
+                                                        ng-options="option.name for option in data.availableOptions track by option.id"
+                                                        ng-model="data.selectedOption"
+                                                        ng-change="filterClient()">
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a href="#/clients/list" class="btn btn-default btn-sm">
+                                                <i class="fa fa-align-justify"></i>
+                                            </a>
+                                            <a href="#/clients/new" class="btn btn-default btn-sm">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </h3>
                             </li>
@@ -84,7 +88,7 @@
                                     </p>
 
                                     <p>
-                                        <i class="icon-inline fa fa-search"></i> {{ client.site }}
+                                        <i class="icon-inline fa fa-search"></i> {{ client.website }}
                                     </p>
                                 </div>
                             </div>
@@ -102,15 +106,15 @@
                                     <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Data de entrega</th>
-                                        <th>Status</th>
+                                        <th class="text-center">Data de entrega</th>
+                                        <th class="text-center">Status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="o in client.projects.data">
                                         <td>{{ o.name }}</td>
-                                        <td>{{ o.due_date | dateBr }}</td>
-                                        <td>{{ o.status }}</td>
+                                        <td width="15%" class="text-center">{{ o.due_date | dateBr }}</td>
+                                        <td width="15%" class="text-center" ng-bind-html="o.status | projectStatus1"></td>
                                     </tr>
                                     </tbody>
                                 </table>

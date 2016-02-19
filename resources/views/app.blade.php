@@ -95,6 +95,7 @@
 
     <!-- FILTERS -->
     <script src="{{ asset('build/js/filters/date-br.js') }}"></script>
+    <script src="{{ asset('build/js/filters/project-status.js') }}"></script>
 
     <!-- SERVICES -->
     <script src="{{ asset('build/js/services/url.js') }}"></script>
