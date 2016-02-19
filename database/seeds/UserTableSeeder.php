@@ -19,6 +19,6 @@ class UserTableSeeder extends Seeder
             'remember_token' => str_random(10),
         ]);
 
-        factory(User::class, 10)->create();
+        factory(User::class, 30)->create();
     }
 }

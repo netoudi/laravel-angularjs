@@ -18,6 +18,11 @@ class ClientTransformer extends TransformerAbstract
             'email' => $model->email,
             'phone' => $model->phone,
             'address' => $model->address,
+            'skype' => $model->skype,
+            'twitter' => $model->twitter,
+            'facebook' => $model->facebook,
+            'google_plus' => $model->google_plus,
+            'website' => $model->website,
             'obs' => $model->obs,
         ];
     }

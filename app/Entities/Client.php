@@ -12,6 +12,11 @@ class Client extends Model
         'email',
         'phone',
         'address',
+        'skype',
+        'twitter',
+        'facebook',
+        'google_plus',
+        'website',
         'obs'
     ];
 

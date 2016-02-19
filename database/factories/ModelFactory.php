@@ -24,28 +24,33 @@ $factory->define(CodeProject\Entities\Client::class, function (Faker\Generator $
     return [
         'name' => $faker->name,
         'responsible' => $faker->name,
-        'email' => $faker->email,
+        'email' => strtolower($faker->email),
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
-        'obs' => $faker->sentence
+        'skype' => $faker->word,
+        'twitter' => strtolower('@' . $faker->domainWord),
+        'facebook' => strtolower($faker->domainWord),
+        'google_plus' => strtolower($faker->domainWord),
+        'website' => strtolower($faker->domainName),
+        'obs' => $faker->paragraph
     ];
 });
 
 $factory->define(CodeProject\Entities\Project::class, function (Faker\Generator $faker) {
     return [
-        'owner_id' => rand(1, 10),
-        'client_id' => rand(1, 10),
+        'owner_id' => rand(1, 30),
+        'client_id' => rand(1, 30),
         'name' => $faker->word,
-        'description' => $faker->sentence,
-        'progress' => rand(1, 100),
-        'status' => rand(1, 3),
+        'description' => $faker->text(300),
+        'progress' => rand(0, 100),
+        'status' => rand(0, 3),
         'due_date' => $faker->dateTime('now')
     ];
 });
 
 $factory->define(CodeProject\Entities\ProjectNote::class, function (Faker\Generator $faker) {
     return [
-        'project_id' => rand(1, 10),
+        'project_id' => rand(1, 30),
         'title' => $faker->word,
         'note' => $faker->paragraph
     ];
@@ -53,7 +58,7 @@ $factory->define(CodeProject\Entities\ProjectNote::class, function (Faker\Genera
 
 $factory->define(CodeProject\Entities\ProjectTask::class, function (Faker\Generator $faker) {
     return [
-        'project_id' => rand(1, 10),
+        'project_id' => rand(1, 30),
         'name' => $faker->name,
         'start_date' => $faker->dateTime('now'),
         'due_date' => $faker->dateTime('now'),
@@ -63,7 +68,7 @@ $factory->define(CodeProject\Entities\ProjectTask::class, function (Faker\Genera
 
 $factory->define(CodeProject\Entities\ProjectMember::class, function (Faker\Generator $faker) {
     return [
-        'project_id' => rand(1, 10),
-        'member_id' => rand(1, 10)
+        'project_id' => rand(1, 30),
+        'member_id' => rand(1, 30)
     ];
 });
