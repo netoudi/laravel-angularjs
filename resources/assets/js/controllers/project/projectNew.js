@@ -5,13 +5,23 @@ angular.module('app.controllers')
                 $scope.project = new Project();
                 $scope.status = appConfig.project.status;
 
+                $scope.start_date = {
+                    status: {
+                        opened: false
+                    }
+                };
+
                 $scope.due_date = {
                     status: {
                         opened: false
                     }
                 };
 
-                $scope.open = function () {
+                $scope.openStartDate = function () {
+                    $scope.start_date.status.opened = true;
+                };
+
+                $scope.openDueDate = function () {
                     $scope.due_date.status.opened = true;
                 };
 

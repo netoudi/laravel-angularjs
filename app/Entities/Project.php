@@ -17,8 +17,15 @@ class Project extends Model implements Transformable
         'description',
         'progress',
         'status',
+        'start_date',
         'due_date'
     ];
+
+    public function getStartDate()
+    {
+        $date = new \DateTime($this->start_date);
+        return $date->format('Y-m-d');
+    }
 
     public function getDueDate()
     {
