@@ -4,96 +4,39 @@
             <div class="col-xs-12">
                 <div class="boxed-manager">
                     <div class="boxed-manager-menu">
-                        <ul class="boxed-manager-menu-nav">
+                        <ul class="boxed-manager-menu-nav" nav-activated>
                             <li class="boxed-manager-menu-nav-header">
                                 <h3 class="h4">
                                     Projetos
 
                                     <div class="btn-group pull-right">
-                                        <a href="" class="btn btn-primary btn-sm text-upper">
-                                            <small>Ver todos</small>
-                                        </a>
-                                        <a href="" class="btn btn-default btn-sm">
-                                            <i class="fa fa-plus"></i>
-                                        </a>
+                                        <div class="btn-group">
+                                            <label class="select-styled select-styled-default select-styled-sm">
+                                                <select name="mySelect" id="mySelect"
+                                                        ng-options="option.name for option in data.availableOptions track by option.id"
+                                                        ng-model="data.selectedOption"
+                                                        ng-change="filterProject()">
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a href="#/project/list" class="btn btn-default btn-sm">
+                                                <i class="fa fa-align-justify"></i>
+                                            </a>
+                                            <a href="#/project/new" class="btn btn-default btn-sm">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </h3>
                             </li>
-                            <li class="boxed-manager-menu-nav-item">
-                                <a href="" class="actived">
+                            <li class="boxed-manager-menu-nav-item" ng-repeat="o in projects">
+                                <a href="javascript:;" ng-click="showProject(o)" ng-class="{'actived': $index == 0}">
                                     <header>
-                                        <h4 class="h4 text-boulder">Nome do projeto</h4>
-                                        <small class="text-upper text-silver">Cliente empresa</small>
+                                        <h4 class="h4 text-boulder">{{ o.name }}</h4>
+                                        <small class="text-upper text-silver">{{ o.client.data.name }}</small>
                                     </header>
-                                    <p class="text-danger status">
-                                        <i class="fa fa-circle"></i> Atrasado
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="boxed-manager-menu-nav-item">
-                                <a href="">
-                                    <header>
-                                        <h4 class="h4 text-boulder">Nome do projeto</h4>
-                                        <small class="text-upper text-silver">Cliente empresa</small>
-                                    </header>
-                                    <p class="text-info status">
-                                        <i class="fa fa-circle"></i> Não iniciou
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="boxed-manager-menu-nav-item">
-                                <a href="">
-                                    <header>
-                                        <h4 class="h4 text-boulder">Nome do projeto</h4>
-                                        <small class="text-upper text-silver">Cliente empresa</small>
-                                    </header>
-                                    <p class="text-success status">
-                                        <i class="fa fa-circle"></i> Iniciado
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="boxed-manager-menu-nav-item">
-                                <a href="">
-                                    <header>
-                                        <h4 class="h4 text-boulder">Nome do projeto</h4>
-                                        <small class="text-upper text-silver">Cliente empresa</small>
-                                    </header>
-                                    <p class="text-danger status">
-                                        <i class="fa fa-circle"></i> Atrasado
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="boxed-manager-menu-nav-item">
-                                <a href="">
-                                    <header>
-                                        <h4 class="h4 text-boulder">Nome do projeto</h4>
-                                        <small class="text-upper text-silver">Cliente empresa</small>
-                                    </header>
-                                    <p class="text-danger status">
-                                        <i class="fa fa-circle"></i> Atrasado
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="boxed-manager-menu-nav-item">
-                                <a href="">
-                                    <header>
-                                        <h4 class="h4 text-boulder">Nome do projeto</h4>
-                                        <small class="text-upper text-silver">Cliente empresa</small>
-                                    </header>
-                                    <p class="text-danger status">
-                                        <i class="fa fa-circle"></i> Atrasado
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="boxed-manager-menu-nav-item">
-                                <a href="">
-                                    <header>
-                                        <h4 class="h4 text-boulder">Nome do projeto</h4>
-                                        <small class="text-upper text-silver">Cliente empresa</small>
-                                    </header>
-                                    <p class="text-danger status">
-                                        <i class="fa fa-circle"></i> Atrasado
-                                    </p>
+                                    <span ng-bind-html="o.status | projectStatus2"></span>
                                 </a>
                             </li>
                         </ul>
@@ -101,47 +44,48 @@
                     <div class="boxed-manager-main arrow">
                         <div class="boxed-manager-main-header">
                             <h4 class="h4">
-                                Nome do projeto <small>(90%)</small>
+                                {{ project.name }}
+                                <small>({{ project.progress }}%)</small>
 
                                 <div class="btn-group pull-right">
-                                    <a href="" class="btn btn-default btn-xs" title="Editar">
+                                    <a href="#/project/{{ project.id }}/edit" class="btn btn-default btn-xs" title="Editar">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="" class="btn btn-danger btn-xs" title="Apagar">
+                                    <a href="#/project/{{ project.id }}/remove" class="btn btn-danger btn-xs" title="Apagar">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </div>
                             </h4>
                         </div>
                         <div class="boxed-manager-main-body">
-                            <div class="btn-group" role="tablist">
-                                <a href="#detalhes"
+                            <div class="btn-group btn-group-justified" role="tablist" tab-project>
+                                <a href=""
                                    aria-controls="detalhes"
                                    role="tab"
                                    data-toggle="tab"
                                    class="btn btn-default active">
-                                    Detalhes
+                                    <i class="fa fa-info"></i> Detalhes
                                 </a>
-                                <a href="#tarefas"
+                                <a href=""
                                    aria-controls="tarefas"
                                    role="tab"
                                    data-toggle="tab"
                                    class="btn btn-default">
-                                    Tarefas
+                                    <i class="fa fa-tasks"></i> Tarefas
                                 </a>
-                                <a href="#arquivos"
+                                <a href=""
                                    aria-controls="arquivos"
                                    role="tab"
                                    data-toggle="tab"
                                    class="btn btn-default">
-                                    Arquivos
+                                    <i class="fa fa-files-o"></i> Arquivos
                                 </a>
-                                <a href="#anotacoes"
+                                <a href=""
                                    aria-controls="anotacoes"
                                    role="tab"
                                    data-toggle="tab"
                                    class="btn btn-default">
-                                    Anotações
+                                    <i class="fa fa-comments-o"></i> Anotações
                                 </a>
                             </div>
 
@@ -150,175 +94,40 @@
 
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="detalhes">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Debitis eius et illo quaerat quasi sit voluptatibus.
-                                        A autem debitis doloremque exercitationem mollitia neque
-                                        quasi quidem ratione vitae voluptate? Architecto at odit
-                                        quia? Aperiam nihil omnis pariatur quae quia recusandae
-                                        rem? Aperiam dolore, exercitationem fuga illo ipsa nemo
-                                        repudiandae similique soluta!</p>
-
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Accusantium libero magni maxime perspiciatis provident
-                                        qui rem similique sit ut vero! Beatae deleniti eum eveniet,
-                                        iure magnam necessitatibus possimus sit tempora.</p>
+                                    {{ project.description }}
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="tarefas">
                                     <div class="task-list">
-                                        <h6 class="task-list-title">Requirements:</h6>
                                         <ul class="task-list-body">
-                                            <li>
+                                            <li ng-repeat="o in project.tasks.data">
                                                 <label>
-                                                    <input type="checkbox" name="" id=""/>
-                                                    Call Joan to discuss existing requirements
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label>
-                                                    <input type="checkbox" name="" id=""/>
-                                                    Call Joan to discuss existing requirements
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label>
-                                                    <input type="checkbox" name="" id=""/>
-                                                    Call Joan to discuss existing requirements
-                                                </label>
-                                            </li>
-                                        </ul>
-
-                                        <h6 class="task-list-title">Development:</h6>
-                                        <ul class="task-list-body">
-                                            <li>
-                                                <label>
-                                                    <input type="checkbox" name="" id=""/>
-                                                    Call Joan to discuss existing requirements
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label>
-                                                    <input type="checkbox" name="" id=""/>
-                                                    Call Joan to discuss existing requirements
-                                                </label>
-                                            </li>
-                                        </ul>
-
-                                        <h6 class="task-list-title">Design:</h6>
-                                        <ul class="task-list-body">
-                                            <li>
-                                                <label>
-                                                    <input type="checkbox" name="" id=""/>
-                                                    Call Joan to discuss existing requirements
+                                                    {{ o.name }} - <span ng-bind-html="o.status | projectStatus1"></span>
                                                 </label>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="arquivos">
-                                    <div class="files-list-blocks">
-                                        <a href="">
-                                            <img src="build/images/icons/ico-ai.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-css.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-doc.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-eps.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-flash.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-html.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-jpg.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-mp3.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-mp4.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-pdf.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-php.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-png.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-txt.png" alt="" />
-                                        </a>
-                                        <a href="">
-                                            <img src="build/images/icons/ico-xml.png" alt="" />
-                                        </a>
+                                    <div class="task-list">
+                                        <ul class="task-list-body">
+                                            <li ng-repeat="o in project.files.data">
+                                                <label>
+                                                    <span ng-bind-html="o.extension | fileExtension"></span>
+                                                    <project-file-download id-project="{{ o.project_id }}" id-file="{{ o.id }}"></project-file-download>
+                                                    {{ o.name }}
+                                                </label>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="anotacoes">
                                     <div class="notes-list">
-                                        <div class="notes-list-item note-type-status-changed">
-                                            <a href="" class="avatar avatar-xs">
-                                                <img src="build/images/avatar.png" alt=""/>
-                                            </a>
+                                        <div class="notes-list-item note-type-status-changed" ng-repeat="o in project.notes.data">
                                             <div class="notes-list-body">
-                                                <h6>
-                                                    Status change on a project
-                                                    <span class="time">3 minutes ago</span>
-                                                </h6>
+                                                <h6>{{ o.title }}</h6>
+
                                                 <p class="notes-list-body-content">
-                                                    The status on <strong>Sample Project</strong> change to <strong>Overdue</strong>
-                                                </p>
-                                            </div>
-                                        </div> <!-- /notes-list-item -->
-                                        <div class="notes-list-item note-type-task-completed">
-                                            <a href="" class="avatar avatar-xs">
-                                                <img src="build/images/avatar.png" alt=""/>
-                                            </a>
-                                            <div class="notes-list-body">
-                                                <h6>
-                                                    <span class="user">Sample Admin</span> completed a task
-                                                    <span class="time">2 years ago</span>
-                                                </h6>
-                                                <p class="notes-list-body-content">
-                                                    <input type="checkbox" name="" id="" disabled="disabled" checked="checked" />
-                                                    Design the new landing page
-                                                </p>
-                                            </div>
-                                        </div> <!-- /notes-list-item -->
-                                        <div class="notes-list-item note-type-attachement">
-                                            <a href="" class="avatar avatar-xs">
-                                                <img src="build/images/avatar.png" alt=""/>
-                                            </a>
-                                            <div class="notes-list-body">
-                                                <h6>
-                                                    <span class="user">Sample Admin</span> upload a file
-                                                    <span class="time">2 years ago</span>
-                                                </h6>
-                                                <p class="notes-list-body-content">
-                                                    <a href="">
-                                                        <i class="fa fa-paperclip"></i> preview.jpg
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div> <!-- /notes-list-item -->
-                                        <div class="notes-list-item note-type-message">
-                                            <a href="" class="avatar avatar-xs">
-                                                <img src="build/images/avatar.png" alt=""/>
-                                            </a>
-                                            <div class="notes-list-body">
-                                                <h6>
-                                                    <span class="user">Sample Admin</span> posted a message on a project
-                                                    (<a href="">Sample Project</a>)
-                                                    <span class="time">2 years ago</span>
-                                                </h6>
-                                                <p class="notes-list-body-content">
-                                                    Hi. John asked me to look at the changes. Everythins looks greate!
+                                                    {{ o.note }}
                                                 </p>
                                             </div>
                                         </div> <!-- /notes-list-item -->
@@ -333,7 +142,7 @@
                         </div>
                         <div class="boxed-manager-info-body">
                             <div class="boxed-manager-info-body-chart text-center">
-                                <div class="radial-progress radial-progress-lg radial-progress-danger" data-progress="90">
+                                <div class="radial-progress radial-progress-lg radial-progress-danger" data-progress="{{ project.progress }}">
                                     <div class="circle">
                                         <div class="mask full">
                                             <div class="fill"></div>
@@ -346,26 +155,26 @@
                                     </div>
                                     <div class="inset">
                                         <div class="percentage">
-                                            <div class="numbers">90%</div>
+                                            <div class="numbers">{{ project.progress }}%</div>
                                         </div>
                                     </div>
                                 </div>
 
-                                Progresso esperado: 100%
+                                Progresso esperado: {{ project.expected_progress }}%
                             </div>
                             <ul class="list-styled">
                                 <li class="list-styled-header text-upper text-center">
                                     Cliente
                                 </li>
-                                <li class="text-center text-silver">Nome do cliente</li>
+                                <li class="text-center text-silver">{{ project.client.data.name }}</li>
                                 <li class="list-styled-header text-upper text-center">
                                     Data de entrega
                                 </li>
-                                <li class="text-center text-silver">20/09/2015</li>
+                                <li class="text-center text-silver">{{ project.due_date | dateBr }}</li>
                                 <li class="list-styled-header text-upper text-center">
-                                    Tarefas (12)
+                                    Tarefas ({{ project.task_count }})
                                 </li>
-                                <li class="text-center text-silver">9 terefas em aberto</li>
+                                <li class="text-center text-silver">{{ project.task_opened }} terefas em aberto</li>
                             </ul>
                         </div>
                     </div>

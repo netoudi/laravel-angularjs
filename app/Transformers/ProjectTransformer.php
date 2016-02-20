@@ -8,7 +8,7 @@ use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class ProjectTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['owner', 'client', 'notes', 'tasks', 'members'];
+    protected $defaultIncludes = ['owner', 'client', 'notes', 'tasks', 'members', 'files'];
 
     public function transform(Project $project)
     {
@@ -16,10 +16,12 @@ class ProjectTransformer extends TransformerAbstract
             'id' => $project->id,
             'name' => $project->name,
             'description' => $project->description,
-            'progress' => (int) $project->progress,
+            'progress' => (int)$project->progress,
             'status' => $project->status,
             'due_date' => $project->getDueDate(),
             'is_member' => $project->owner_id != Authorizer::getResourceOwnerId(),
+            'task_count' => $project->tasks->count(),
+            'task_opened' => $this->countTasksOpened($project)
         ];
     }
 
@@ -46,5 +48,22 @@ class ProjectTransformer extends TransformerAbstract
     public function includeMembers(Project $project)
     {
         return $this->collection($project->members, new UserTransformer());
+    }
+
+    public function includeFiles(Project $project)
+    {
+        return $this->collection($project->files, new ProjectFileTransformer());
+    }
+
+    private function countTasksOpened(Project $project)
+    {
+        $count = 0;
+        foreach ($project->tasks as $o) {
+            if ($o->status == 1) {
+                $count++;
+            }
+        }
+
+        return $count;
     }
 }

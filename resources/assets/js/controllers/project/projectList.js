@@ -1,7 +1,6 @@
 angular.module('app.controllers')
-    .controller('ProjectListController', ['$scope', '$routeParams', 'Project',
-        function ($scope, $routeParams, Project) {
-
+    .controller('ProjectListController', ['$scope', 'Project',
+        function ($scope, Project) {
             $scope.projects = [];
             $scope.totalProjects = 0;
             $scope.projectsPerPage = 15;

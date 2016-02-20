@@ -2,10 +2,9 @@
 
 namespace CodeProject\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Entities\Project;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class ProjectRepositoryEloquent
@@ -13,6 +12,10 @@ use CodeProject\Entities\Project;
  */
 class ProjectRepositoryEloquent extends BaseRepository implements ProjectRepository
 {
+    protected $fieldSearchable = [
+        'name'
+    ];
+
     /**
      * Specify Model class name
      *
@@ -68,6 +71,5 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
                 ->where('project_members.member_id', '=', $userId)
                 ->union($this->model->query()->getQuery()->where('owner_id', '=', $userId));
         })->all();
-
     }
 }

@@ -92,10 +92,13 @@
     <script src="{{ asset('build/js/directives/loginForm.js') }}"></script>
     <script src="{{ asset('build/js/directives/loadTemplate.js') }}"></script>
     <script src="{{ asset('build/js/directives/menuActivated.js') }}"></script>
+    <script src="{{ asset('build/js/directives/navActivated.js') }}"></script>
+    <script src="{{ asset('build/js/directives/tabProject.js') }}"></script>
 
     <!-- FILTERS -->
     <script src="{{ asset('build/js/filters/date-br.js') }}"></script>
     <script src="{{ asset('build/js/filters/project-status.js') }}"></script>
+    <script src="{{ asset('build/js/filters/file-extension.js') }}"></script>
 
     <!-- SERVICES -->
     <script src="{{ asset('build/js/services/url.js') }}"></script>

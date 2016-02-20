@@ -1,8 +1,14 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <h3>Projeto <strong>{{ project.name | uppercase }}</strong><a ng-href="#/project" class="pull-right"><small>&laquo; Voltar</small></a></h3>
+        <div class="col-sm-12">
+            <h3>
+                Projeto <strong>{{ project.name | uppercase }}</strong>
+                <a ng-href="#/project" class="pull-right">
+                    <small>&laquo; Voltar</small>
+                </a>
+            </h3>
             <br>
+
             <div class="panel panel-default">
                 <div class="panel-heading">Listagem de Tarefas <a ng-href="#/project/{{ project.id }}/task/new" class="pull-right">Nova Tarefa</a></div>
                 <div class="panel-body">
@@ -21,7 +27,7 @@
                             <td>{{ o.name }}</td>
                             <td>{{ o.start_date | dateBr }}</td>
                             <td>{{ o.due_date | dateBr }}</td>
-                            <td>{{ o.status }}</td>
+                            <td ng-bind-html="o.status | projectStatus1"></td>
                             <td>
                                 <a ng-href="#/project/{{ o.project_id }}/task/{{ o.id }}/edit">Editar</a> |
                                 <a ng-href="#/project/{{ o.project_id }}/task/{{ o.id }}/remove">Excluir</a>
