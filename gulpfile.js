@@ -27,14 +27,17 @@ config.vendor_path_js = [
     config.bower_path + '/angular-oauth2/dist/angular-oauth2.min.js',
     config.bower_path + '/ng-file-upload/ng-file-upload.min.js',
     config.bower_path + '/angular-http-auth/src/http-auth-interceptor.js',
-    config.bower_path + '/angularUtils-pagination/dirPagination.js'
+    config.bower_path + '/angularUtils-pagination/dirPagination.js',
+    config.bower_path + '/datatables/media/js/jquery.dataTables.min.js',
+    config.bower_path + '/angular-datatables/dist/angular-datatables.min.js'
 ];
 
 config.build_path_css = config.build_path + '/css';
 config.build_vendor_path_css = config.build_path_css + '/vendor';
 config.vendor_path_css = [
     config.bower_path + '/bootstrap/dist/css/bootstrap.min.css',
-    config.bower_path + '/bootstrap/dist/css/bootstrap-theme.min.css'
+    config.bower_path + '/bootstrap/dist/css/bootstrap-theme.min.css',
+    config.bower_path + '/datatables/media/css/dataTables.bootstrap.min.css'
 ];
 
 config.build_path_html = config.build_path + '/views';

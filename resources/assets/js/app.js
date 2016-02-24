@@ -12,7 +12,8 @@ var app = angular.module('app', [
     'ngFileUpload',
     'http-auth-interceptor',
     'angularUtils.directives.dirPagination',
-    'mgcrea.ngStrap.navbar'
+    'mgcrea.ngStrap.navbar',
+    'datatables'
 ]);
 
 angular.module('app.controllers', ['ngMessages', 'angular-oauth2']);

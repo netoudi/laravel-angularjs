@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{ asset('build/css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('build/css/flaticon.css') }}">
         <link rel="stylesheet" href="{{ asset('build/css/components.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/css/vendor/datatables.bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
     @else
         <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
@@ -47,6 +48,8 @@
     <script src="{{ asset('build/js/vendor/ng-file-upload.min.js') }}"></script>
     <script src="{{ asset('build/js/vendor/http-auth-interceptor.js') }}"></script>
     <script src="{{ asset('build/js/vendor/dirPagination.js') }}"></script>
+    <script src="{{ asset('build/js/vendor/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('build/js/vendor/angular-datatables.min.js') }}"></script>
 
     <script src="{{ asset('build/js/app.js') }}"></script>
 
