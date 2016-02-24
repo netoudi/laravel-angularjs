@@ -13,7 +13,8 @@ use Prettus\Repository\Eloquent\BaseRepository;
 class ProjectRepositoryEloquent extends BaseRepository implements ProjectRepository
 {
     protected $fieldSearchable = [
-        'name'
+        'name',
+        'status'
     ];
 
     /**

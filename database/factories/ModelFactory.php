@@ -44,7 +44,8 @@ $factory->define(CodeProject\Entities\Project::class, function (Faker\Generator 
         'description' => $faker->text(300),
         'progress' => rand(0, 100),
         'status' => rand(0, 3),
-        'due_date' => $faker->dateTime('now')
+        'start_date' => $faker->dateTime('now'),
+        'due_date' => $faker->dateTime($faker->dateTime('now'), '+ 360 days')
     ];
 });
 

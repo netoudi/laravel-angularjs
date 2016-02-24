@@ -22,4 +22,16 @@ angular.module('app.filters')
 
             return $sce.trustAsHtml(status[input]);
         };
+    }])
+    .filter('projectStatus3', ['$sce', function ($sce) {
+        return function (input, args) {
+            var status = [
+                '<span class="text-warning status"><i class="fa fa-circle"></i> Não iniciou <span class="pull-right">' + args + '</span></span>',
+                '<span class="text-info status"><i class="fa fa-circle"></i> Iniciado <span class="pull-right">' + args + '</span></span>',
+                '<span class="text-danger status"><i class="fa fa-circle"></i> Atrasado <span class="pull-right">' + args + '</span></span>',
+                '<span class="text-success status"><i class="fa fa-circle"></i> Concluído <span class="pull-right">' + args + '</span></span>',
+            ];
+
+            return $sce.trustAsHtml(status[input]);
+        };
     }]);

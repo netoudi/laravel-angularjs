@@ -16,12 +16,15 @@ class ProjectTransformer extends TransformerAbstract
             'id' => $project->id,
             'name' => $project->name,
             'description' => $project->description,
-            'progress' => (int)$project->progress,
+            'progress' => $this->countProgress($project),
             'status' => $project->status,
+            'start_date' => $project->getStartDate(),
             'due_date' => $project->getDueDate(),
             'is_member' => $project->owner_id != Authorizer::getResourceOwnerId(),
             'task_count' => $project->tasks->count(),
-            'task_opened' => $this->countTasksOpened($project)
+            'task_opened' => $this->countTasksOpened($project),
+            'expected_progress' => $this->countExpectedProgress($project),
+            'day_count' => $this->countDay($project)
         ];
     }
 
@@ -59,11 +62,71 @@ class ProjectTransformer extends TransformerAbstract
     {
         $count = 0;
         foreach ($project->tasks as $o) {
-            if ($o->status == 1) {
+            if ($o->status < 3) {
                 $count++;
             }
         }
 
         return $count;
+    }
+
+    private function countProgress(Project $project)
+    {
+        if ($project->tasks->count() > 0) {
+            if ($this->countTasksOpened($project) > 0) {
+                $progress = $this->countTasksOpened($project) * 100 / $project->tasks->count();
+                $project->progress = (int)$progress;
+            } else {
+                $project->progress = 100;
+                $project->status = 3;
+            }
+            $project->save();
+            return $project->progress;
+        }
+        return 0;
+    }
+
+    private function countExpectedProgress(Project $project)
+    {
+        $nowDate = new \DateTime('now');
+        $tasksOpen = $this->countTasksOpened($project);
+
+        $countLate = 0;
+        foreach ($project->tasks as $o) {
+            $startDate = new \DateTime($o->start_date);
+            $dueDate = new \DateTime($o->due_date);
+            if (($o->status == 0 || $o->status == 1) && $startDate <= $nowDate) {
+                $countLate++;
+            } elseif ($o->status < 3 && $dueDate <= $nowDate) {
+                $o->status = 2;
+                $o->save();
+                $countLate++;
+            }
+        }
+
+        if ($countLate > 0) {
+            return (int)($countLate * 100 / $tasksOpen);
+        }
+        return 0;
+    }
+
+    private function countDay(Project $project)
+    {
+        $nowDate = new \DateTime('now');
+        $startDate = new \DateTime($project->start_date);
+        $dueDate = new \DateTime($project->due_date);
+
+        if ($project->status == 0) { // Não iniciou
+            return '+0';
+        } elseif ($project->status == 1) { // Iniciado
+            $interval = $startDate->diff($nowDate);
+            return '+' . $interval->d;
+        } elseif ($project->status == 2) { // Atrasado
+            $interval = $dueDate->diff($nowDate);
+            return '-' . $interval->d;
+        } elseif ($project->status == 3) { // Concluído
+            $interval = $startDate->diff($dueDate);
+            return '+' . $interval->d;
+        }
     }
 }
