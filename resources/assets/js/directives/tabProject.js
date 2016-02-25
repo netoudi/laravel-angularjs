@@ -4,7 +4,7 @@ angular.module('app.directives')
             restrict: 'A',
             link: function (scope, element, attr) {
                 $(element).find('a').click(function () {
-                    var tabContent = $(element).parent().find('.tab-content'),
+                    var tabContent = $($('div').filter('.tab-content')),
                         a = $(this);
                     $(element).find('.active').removeClass('active');
                     tabContent.find('.active').removeClass('active');

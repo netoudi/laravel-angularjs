@@ -20,11 +20,11 @@
                                         </select>
                                     </label>
                                 </div>
-                                <div class="btn-group">
-                                    <a href="" class="btn btn-default btn-sm">
+                                <div class="btn-group" role="tablist" tab-project>
+                                    <a href="javascript:;" class="btn btn-default btn-sm active" role="tab" data-toggle="tab" aria-controls="box">
                                         <i class="fa fa-th"></i>
                                     </a>
-                                    <a href="" class="btn btn-default btn-sm">
+                                    <a href="javascript:;" class="btn btn-default btn-sm" role="tab" data-toggle="tab" aria-controls="list">
                                         <i class="fa fa-align-justify"></i>
                                     </a>
                                 </div>
@@ -37,77 +37,114 @@
                     </div>
                 </header> <!-- /header-internal -->
 
-                <div class="row">
-                    <div class="col-sm-4" ng-repeat="o in projects">
-                        <div class="panel panel-default panel-stacked">
-                            <div class="panel-heading bg-white no-border-bottom text-boulder">
-                                <h3 class="h4 text-boulder">{{ o.name }}</h3>
-                                <small class="text-upper text-silver">{{ o.client.data.name }}</small>
-                            </div> <!-- /panel-heading bg-white -->
-                            <div class="panel-body">
-                                <ul class="list-unstyled list-padding text-boulder">
-                                    <li class="clearfix">
-                                        Progresso:
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="box">
+                        <div class="row">
+                            <div class="col-sm-4" ng-repeat="o in projects">
+                                <div class="panel panel-default panel-stacked">
+                                    <div class="panel-heading bg-white no-border-bottom text-boulder">
+                                        <h3 class="h4 text-boulder">{{ o.name }}</h3>
+                                        <small class="text-upper text-silver">{{ o.client.data.name }}</small>
+                                    </div> <!-- /panel-heading bg-white -->
+                                    <div class="panel-body">
+                                        <ul class="list-unstyled list-padding text-boulder">
+                                            <li class="clearfix">
+                                                Progresso:
 
-                                        <div class="radial-progress radial-progress-xs radial-progress-warning progresso-inline pull-right" data-progress="{{ o.progress }}">
-                                            <div class="circle">
-                                                <div class="mask full">
-                                                    <div class="fill"></div>
+                                                <div class="radial-progress radial-progress-xs radial-progress-warning progresso-inline pull-right"
+                                                     data-progress="{{ o.progress }}">
+                                                    <div class="circle">
+                                                        <div class="mask full">
+                                                            <div class="fill"></div>
+                                                        </div>
+                                                        <div class="mask half">
+                                                            <div class="fill"></div>
+                                                            <div class="fill fix"></div>
+                                                        </div>
+                                                        <div class="shadow"></div>
+                                                    </div>
+                                                    <div class="inset">
+                                                        <div class="percentage">
+                                                            <div class="numbers">{{ o.progress }}%</div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="mask half">
-                                                    <div class="fill"></div>
-                                                    <div class="fill fix"></div>
-                                                </div>
-                                                <div class="shadow"></div>
-                                            </div>
-                                            <div class="inset">
-                                                <div class="percentage">
-                                                    <div class="numbers">{{ o.progress }}%</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        Progresso esperado:
+                                            </li>
+                                            <li class="clearfix">
+                                                Progresso esperado:
 
-                                        <div class="radial-progress radial-progress-xs radial-progress-warning progresso-inline pull-right" data-progress="{{ o.expected_progress }}">
-                                            <div class="circle">
-                                                <div class="mask full">
-                                                    <div class="fill"></div>
+                                                <div class="radial-progress radial-progress-xs radial-progress-warning progresso-inline pull-right"
+                                                     data-progress="{{ o.expected_progress }}">
+                                                    <div class="circle">
+                                                        <div class="mask full">
+                                                            <div class="fill"></div>
+                                                        </div>
+                                                        <div class="mask half">
+                                                            <div class="fill"></div>
+                                                            <div class="fill fix"></div>
+                                                        </div>
+                                                        <div class="shadow"></div>
+                                                    </div>
+                                                    <div class="inset">
+                                                        <div class="percentage">
+                                                            <div class="numbers">{{ o.expected_progress }}%</div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="mask half">
-                                                    <div class="fill"></div>
-                                                    <div class="fill fix"></div>
-                                                </div>
-                                                <div class="shadow"></div>
-                                            </div>
-                                            <div class="inset">
-                                                <div class="percentage">
-                                                    <div class="numbers">{{ o.expected_progress }}%</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        Prazo: <span class="pull-right text-orange">{{ o.due_date | dateBr }}</span>
-                                    </li>
-                                </ul> <!-- /panel-list-unstyled -->
-                            </div> <!-- /panel-body -->
-                            <div class="panel-footer panel-footer-xs no-border-top sazerac font-bold">
-                                <span ng-bind-html="o.status | projectStatus3:o.day_count"></span>
-                            </div> <!-- /panel-footer panel-footer-xs sazerac -->
-                        </div> <!-- /panel.panel-default -->
+                                            </li>
+                                            <li>
+                                                Prazo: <span class="pull-right text-orange">{{ o.due_date | dateBrFull }}</span>
+                                            </li>
+                                        </ul> <!-- /panel-list-unstyled -->
+                                    </div> <!-- /panel-body -->
+                                    <div class="panel-footer panel-footer-xs no-border-top sazerac font-bold">
+                                        <span ng-bind-html="o.status | projectStatus3:o.day_count"></span>
+                                    </div> <!-- /panel-footer panel-footer-xs sazerac -->
+                                </div> <!-- /panel.panel-default -->
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="list">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Projeto</th>
+                                        <th>Cliente</th>
+                                        <th class="text-center">Progresso</th>
+                                        <th class="text-center">Progresso esperado</th>
+                                        <th>Prazo</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="o in projects">
+                                        <td>{{ o.name }}</td>
+                                        <td>{{ o.client.data.name }}</td>
+                                        <td class="text-center">{{ o.progress }}%</td>
+                                        <td class="text-center">{{ o.expected_progress }}%</td>
+                                        <td>{{ o.due_date | dateBr }}</td>
+                                        <td ng-bind-html="o.status | projectStatus3:o.day_count"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div> <!-- /tab-content -->
+
             <div class="col-xs-3">
                 <h5>Últimas atualizações</h5>
 
                 <br/>
+
                 <div class="mini-timeline">
                     <div class="list-item list-item-stacked text-boulder">
                         <div class="clearfix">
                             <img src="http://mmn.silasribas.com.br/bundles/sonbase/geral/images/anonymous.png?2" alt="" class="avatar-sm rounded"/>
+
                             <p>
                                 <strong>Mudança de status em um projeto</strong>
                                 <br/>
@@ -120,6 +157,7 @@
                     <div class="list-item list-item-stacked text-boulder">
                         <div class="clearfix">
                             <img src="http://mmn.silasribas.com.br/bundles/sonbase/geral/images/anonymous.png?2" alt="" class="avatar-sm rounded"/>
+
                             <p>
                                 <strong>Mudança de status em um projeto</strong>
                                 <br/>
@@ -132,6 +170,7 @@
                     <div class="list-item list-item-stacked text-boulder">
                         <div class="clearfix">
                             <img src="http://mmn.silasribas.com.br/bundles/sonbase/geral/images/anonymous.png?2" alt="" class="avatar-sm rounded"/>
+
                             <p>
                                 <strong>Mudança de status em um projeto</strong>
                                 <br/>
@@ -144,6 +183,7 @@
                     <div class="list-item list-item-stacked text-boulder">
                         <div class="clearfix">
                             <img src="http://mmn.silasribas.com.br/bundles/sonbase/geral/images/anonymous.png?2" alt="" class="avatar-sm rounded"/>
+
                             <p>
                                 <strong>Mudança de status em um projeto</strong>
                                 <br/>
@@ -156,6 +196,7 @@
                     <div class="list-item list-item-stacked text-boulder">
                         <div class="clearfix">
                             <img src="http://mmn.silasribas.com.br/bundles/sonbase/geral/images/anonymous.png?2" alt="" class="avatar-sm rounded"/>
+
                             <p>
                                 <strong>Mudança de status em um projeto</strong>
                                 <br/>
@@ -168,6 +209,7 @@
                     <div class="list-item list-item-stacked text-boulder">
                         <div class="clearfix">
                             <img src="http://mmn.silasribas.com.br/bundles/sonbase/geral/images/anonymous.png?2" alt="" class="avatar-sm rounded"/>
+
                             <p>
                                 <strong>Mudança de status em um projeto</strong>
                                 <br/>
