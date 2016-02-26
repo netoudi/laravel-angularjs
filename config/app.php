@@ -142,6 +142,8 @@ return [
         LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
         LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
 
+        Yajra\Datatables\DatatablesServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -200,6 +202,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Authorizer' => LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
+        'Datatables' => Yajra\Datatables\Datatables::class,
     ],
 
 ];
