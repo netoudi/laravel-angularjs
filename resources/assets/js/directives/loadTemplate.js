@@ -20,7 +20,7 @@ angular.module('app.directives')
                         resetTemplate();
 
                         function resetTemplate() {
-                            scope.isTemplateLoad = true;
+                            scope.isTemplateLoad = false;
                             element.html("");
                         }
                     });
