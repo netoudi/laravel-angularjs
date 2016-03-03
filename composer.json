@@ -11,7 +11,8 @@
         "prettus/laravel-validation": "1.1.*",
         "lucadegasperi/oauth2-server-laravel": "^5.0",
         "league/fractal": "^0.12.0",
-        "yajra/laravel-datatables-oracle": "~6.0"
+        "yajra/laravel-datatables-oracle": "~6.0",
+        "pusher/pusher-php-server": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

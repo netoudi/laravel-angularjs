@@ -30,7 +30,8 @@ config.vendor_path_js = [
     config.bower_path + '/angularUtils-pagination/dirPagination.js',
     config.bower_path + '/datatables/media/js/jquery.dataTables.min.js',
     config.bower_path + '/datatables/media/js/dataTables.bootstrap.min.js',
-    config.bower_path + '/angular-datatables/dist/angular-datatables.min.js'
+    config.bower_path + '/angular-datatables/dist/angular-datatables.min.js',
+    config.bower_path + '/pusher/dist/pusher.min.js'
 ];
 
 config.build_path_css = config.build_path + '/css';
