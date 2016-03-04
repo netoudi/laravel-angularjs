@@ -52,6 +52,7 @@
     <script src="{{ asset('build/js/vendor/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('build/js/vendor/angular-datatables.min.js') }}"></script>
     <script src="{{ asset('build/js/vendor/pusher.min.js') }}"></script>
+    <script src="{{ asset('build/js/vendor/pusher-angular.min.js') }}"></script>
 
     <script src="{{ asset('build/js/app.js') }}"></script>
 
