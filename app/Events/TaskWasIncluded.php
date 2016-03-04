@@ -31,6 +31,6 @@ class TaskWasIncluded extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['user' . \Authorizer::getResourceOwnerId()];
+        return ['user.' . \Authorizer::getResourceOwnerId()];
     }
 }
