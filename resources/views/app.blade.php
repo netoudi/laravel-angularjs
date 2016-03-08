@@ -106,6 +106,7 @@
     <!-- FILTERS -->
     <script src="{{ asset('build/js/filters/date-br.js') }}"></script>
     <script src="{{ asset('build/js/filters/project-status.js') }}"></script>
+    <script src="{{ asset('build/js/filters/projectTask-status.js') }}"></script>
     <script src="{{ asset('build/js/filters/file-extension.js') }}"></script>
 
     <!-- SERVICES -->

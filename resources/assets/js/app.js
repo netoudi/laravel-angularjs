@@ -249,8 +249,21 @@ app.run([
                         var channel = pusher.subscribe('user.' + $cookies.getObject('user').id);
                         channel.bind('CodeProject\\Events\\TaskWasIncluded',
                             function (data) {
-                                var name = data.projectTask.name;
-                                Notification.success('Tarefa ' + name + ' foi incluída!');
+                                var name = data.projectTask.data.name, status = data.projectTask.data.status;
+                                switch (parseInt(status)) {
+                                    case 0:
+                                        Notification.warning('Tarefa "' + name + '" foi incluída!');
+                                        break;
+                                    case 1:
+                                        Notification.info('Tarefa "' + name + '" foi iniciada!');
+                                        break;
+                                    case 2:
+                                        Notification.error('Tarefa "' + name + '" está atrasada!');
+                                        break;
+                                    case 3:
+                                        Notification.success('Tarefa "' + name + '" foi concluída!');
+                                        break;
+                                }
                             }
                         );
                     }
@@ -259,9 +272,9 @@ app.run([
         });
 
         $rootScope.$on('pusher-destroy', function (event, data) {
-            if (data.next.$$route.orignalPath != '/login') {
+            if (data.next.$$route.orignalPath == '/login') {
                 if (window.client) {
-                    window.client.disconnect;
+                    window.client.disconnect();
                     window.client = null;
                 }
             }
