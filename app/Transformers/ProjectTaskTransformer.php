@@ -7,6 +7,8 @@ use CodeProject\Entities\ProjectTask;
 
 class ProjectTaskTransformer extends TransformerAbstract
 {
+    protected $defaultIncludes = ['project'];
+
     public function transform(ProjectTask $model)
     {
         return [
@@ -19,5 +21,10 @@ class ProjectTaskTransformer extends TransformerAbstract
             'created_at' => $model->getCreatedAt(),
             'updated_at' => $model->getUpdatedAt(),
         ];
+    }
+
+    public function includeProject(ProjectTask $model)
+    {
+        return $this->item($model->project, new ProjectTransformer());
     }
 }

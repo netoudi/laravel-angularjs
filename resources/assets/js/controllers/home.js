@@ -31,6 +31,7 @@ angular.module('app.controllers')
             });
 
             Project.query({
+                include: 'client',
                 limit: 12,
                 orderBy: 'created_at',
                 sortedBy: 'desc'
@@ -44,6 +45,7 @@ angular.module('app.controllers')
 
             $scope.filterProject = function () {
                 Project.query({
+                    include: 'client',
                     limit: 10,
                     orderBy: 'created_at',
                     sortedBy: 'desc',

@@ -146,6 +146,8 @@
                             <!--<img src="http://mmn.silasribas.com.br/bundles/sonbase/geral/images/anonymous.png?2" alt="" class="avatar-sm rounded"/>-->
 
                             <p>
+                                <strong>PROJETO {{ o.project.data.name | uppercase }}</strong>
+                                <br/>
                                 <strong ng-bind-html="o.status | projectTaskStatus:o.updated_at"></strong>
                                 <br/>
                                 <!--<small>há alguns segundos</small>-->

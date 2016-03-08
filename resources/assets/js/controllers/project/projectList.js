@@ -15,6 +15,7 @@ angular.module('app.controllers')
 
             function getResultsPage(pageNumber) {
                 Project.query({
+                    include: 'client',
                     page: pageNumber,
                     limit: $scope.projectsPerPage
                 }, function (data) {

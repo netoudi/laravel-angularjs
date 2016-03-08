@@ -8,7 +8,7 @@ use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class ProjectTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['owner', 'client', 'notes', 'tasks', 'members', 'files'];
+    protected $availableIncludes = ['owner', 'client', 'notes', 'tasks', 'members', 'files'];
 
     public function transform(Project $project)
     {
@@ -45,7 +45,10 @@ class ProjectTransformer extends TransformerAbstract
 
     public function includeTasks(Project $project)
     {
-        return $this->collection($project->tasks, new ProjectTaskTransformer());
+        $transformer = new ProjectTaskTransformer();
+        $transformer->setDefaultIncludes([]);
+
+        return $this->collection($project->tasks, $transformer);
     }
 
     public function includeMembers(Project $project)
