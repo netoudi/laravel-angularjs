@@ -16,6 +16,8 @@ class ProjectTaskTransformer extends TransformerAbstract
             'start_date' => $model->getStartDate(),
             'due_date' => $model->getDueDate(),
             'status' => $model->status,
+            'created_at' => $model->getCreatedAt(),
+            'updated_at' => $model->getUpdatedAt(),
         ];
     }
 }

@@ -10,5 +10,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface ProjectTaskRepository extends RepositoryInterface
 {
-    //
+    public function recentTasks($userId, $limit = 6);
 }

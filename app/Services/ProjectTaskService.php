@@ -3,8 +3,10 @@
 namespace CodeProject\Services;
 
 
+use CodeProject\Events\TaskWasIncluded;
 use CodeProject\Repositories\ProjectTaskRepository;
 use CodeProject\Validators\ProjectTaskValidator;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 class ProjectTaskService
@@ -32,8 +34,14 @@ class ProjectTaskService
     {
         try {
             $this->validator->with($data)->passesOrFail();
+
             $this->setPresenter();
-            return $this->repository->create($data);
+
+            $result = $this->repository->create($data);
+
+            event(new TaskWasIncluded($result));
+
+            return $result;
         } catch (ValidatorException $e) {
             return [
                 'error' => true,
@@ -51,8 +59,14 @@ class ProjectTaskService
     {
         try {
             $this->validator->with($data)->passesOrFail();
+
             $this->setPresenter();
-            return $this->repository->update($data, $noteId);
+
+            $result = $this->repository->update($data, $noteId);
+
+            event(new TaskWasIncluded($result));
+
+            return $result;
         } catch (ValidatorException $e) {
             return [
                 'error' => true,
@@ -66,10 +80,14 @@ class ProjectTaskService
         }
     }
 
-    public function all($id)
+    public function all($id = null, $limit = 6)
     {
         $this->setPresenter();
-        return $this->repository->findWhere(['project_id' => $id]);
+        if (!is_null($id)) {
+            return $this->repository->findWhere(['project_id' => $id]);
+        }
+
+        return $this->repository->recentTasks(Authorizer::getResourceOwnerId(), $limit);
     }
 
     public function find($id, $noteId)

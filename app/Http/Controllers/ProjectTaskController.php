@@ -83,4 +83,9 @@ class ProjectTaskController extends Controller
     {
         return $this->service->delete($taskId);
     }
+
+    public function recentTasks()
+    {
+        return $this->service->all();
+    }
 }
